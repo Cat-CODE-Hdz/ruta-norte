@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import { openWhatsAppOrDemo } from './lib/whatsapp'
+﻿import { useState } from 'react'
+import { openWhatsAppOrDemo, DEMO_MODE } from './lib/whatsapp'
 
-const IMG = '/ruta-norte/images/ruta-norte'
+const IMG = `${import.meta.env.BASE_URL}images`
 
 const NAV_LINKS = [
   { label: 'Experiencias', href: '#experiencias' },
@@ -15,25 +15,29 @@ const EXPERIENCES = [
     id: 'naturaleza',
     title: 'Naturaleza',
     desc: 'Senderos, montañas, acantilados y paisajes que invitan a parar.',
-    image: `${IMG}/experiences/naturaleza.svg`,
+    body: 'Rutas de senderismo suaves o exigentes, miradores, bosques y acantilados. Adaptamos el ritmo y la distancia al grupo, con paradas para disfrutar del paisaje y opciones de media jornada o día completo.',
+    image: `${IMG}/experiences/naturaleza.webp`,
   },
   {
     id: 'gastronomia',
     title: 'Gastronomía',
     desc: 'Sabores locales, mercados, productores y mesas que cuentan historias.',
-    image: `${IMG}/experiences/gastronomia.svg`,
+    body: 'Mercados, productores locales y mesas de temporada. Una experiencia para probar el norte a través de sus productos, con visitas guiadas y propuestas gastronómicas adaptadas al grupo.',
+    image: `${IMG}/experiences/gastronomia.webp`,
   },
   {
     id: 'aventura',
     title: 'Aventura',
     desc: 'Actividades para salir de la rutina y ver el norte desde otra perspectiva.',
-    image: `${IMG}/experiences/aventura.svg`,
+    body: 'Actividades al aire libre para salir de la rutina: rutas activas, kayak, vías verdes y propuestas que combinan naturaleza y movimiento, siempre con alternativas según el tiempo.',
+    image: `${IMG}/experiences/aventura.webp`,
   },
   {
     id: 'escapadas',
     title: 'Escapadas',
     desc: 'Una pausa de unos días para desconectar y volver con otra energía.',
-    image: `${IMG}/experiences/escapadas.svg`,
+    body: 'Programas de dos o tres días que combinan paisaje, gastronomía y descanso. Diseñamos el itinerario contigo y coordinamos los puntos de encuentro y las paradas.',
+    image: `${IMG}/experiences/escapadas.webp`,
   },
 ]
 
@@ -42,25 +46,25 @@ const DESTINATIONS = [
     id: 'asturias',
     name: 'Asturias',
     desc: 'Verde, salvaje y atlántica.',
-    image: `${IMG}/destinations/asturias.svg`,
+    image: `${IMG}/destinations/asturias.webp`,
   },
   {
     id: 'cantabria',
     name: 'Cantabria',
     desc: 'Montaña, costa y pueblos con historia.',
-    image: `${IMG}/destinations/cantabria.svg`,
+    image: `${IMG}/destinations/cantabria.webp`,
   },
   {
     id: 'pais-vasco',
     name: 'País Vasco',
     desc: 'Mar, gastronomía y cultura.',
-    image: `${IMG}/destinations/pais-vasco.svg`,
+    image: `${IMG}/destinations/pais-vasco.webp`,
   },
   {
     id: 'galicia',
     name: 'Galicia',
     desc: 'Atlántico, tradición y paisajes.',
-    image: `${IMG}/destinations/galicia.svg`,
+    image: `${IMG}/destinations/galicia.webp`,
   },
 ]
 
@@ -90,12 +94,12 @@ const TRUST_ITEMS = [
 ]
 
 const GALLERY = [
-  { src: `${IMG}/destinations/asturias.svg`, alt: 'Paisaje atlántico de Asturias' },
-  { src: `${IMG}/experiences/naturaleza.svg`, alt: 'Sendero entre montañas del norte' },
-  { src: `${IMG}/destinations/galicia.svg`, alt: 'Costa de Galicia al atardecer' },
-  { src: `${IMG}/experiences/gastronomia.svg`, alt: 'Producto local del norte de España' },
-  { src: `${IMG}/destinations/cantabria.svg`, alt: 'Montaña y costa de Cantabria' },
-  { src: `${IMG}/destinations/pais-vasco.svg`, alt: 'Mar y montaña del País Vasco' },
+  { src: `${IMG}/instagram/post-01.webp`, alt: 'Costa atlántica del norte de España' },
+  { src: `${IMG}/instagram/post-02.webp`, alt: 'Valle y montañas del norte de España' },
+  { src: `${IMG}/instagram/post-03.webp`, alt: 'Paisaje del norte de España' },
+  { src: `${IMG}/instagram/post-04.webp`, alt: 'Acantilados y valle del norte de España' },
+  { src: `${IMG}/instagram/post-05.webp`, alt: 'Costa del norte de España' },
+  { src: `${IMG}/instagram/post-06.webp`, alt: 'Olas del Atlántico en la costa norte' },
 ]
 
 const FAQ_ITEMS = [
@@ -125,7 +129,8 @@ const JOURNAL = [
     title: '5 lugares del norte que merece la pena descubrir',
     excerpt:
       'Una selección de rincones del norte de España para inspirar tu próxima escapada, lejos de lo más conocido.',
-    image: `${IMG}/destinations/asturias.svg`,
+    body: 'Del litoral a los valles, esta selección reúne rincones que no siempre aparecen en las guías. Pueblos pequeños, miradores poco transitados y caminos que invitan a parar. Una base para construir tu propia escapada.',
+    image: `${IMG}/journal/lugares.webp`,
   },
   {
     id: 'journal-02',
@@ -134,7 +139,8 @@ const JOURNAL = [
     title: 'Qué hacer cuando el mar y la montaña están a pocos kilómetros',
     excerpt:
       'En el norte no siempre hay que elegir: así se combinan costa y altura en el mismo día.',
-    image: `${IMG}/destinations/cantabria.svg`,
+    body: 'Cuando la costa y la montaña están cerca, el día da para mucho. Te proponemos empezar en el litoral, subir a un mirador al mediodía y cerrar con una mesa local. La clave está en elegir bien las distancias.',
+    image: `${IMG}/journal/mar-montana.webp`,
   },
   {
     id: 'journal-03',
@@ -143,13 +149,14 @@ const JOURNAL = [
     title: 'Una guía para descubrir el norte a través de su gastronomía',
     excerpt:
       'Mercados, productores y mesas locales: la mejor puerta de entrada a cada territorio.',
-    image: `${IMG}/experiences/gastronomia.svg`,
+    body: 'Mercados de proximidad, queserías, conservas y mesas familiares. Recorrer el norte a través de su gastronomía es una forma directa de entender cada territorio. Aquí van algunas paradas para empezar.',
+    image: `${IMG}/journal/gastronomia.webp`,
   },
 ]
 
 const CASES = [
   {
-    tag: 'Escenario real de una salida',
+    tag: 'Escenario tipo de una salida',
     title: 'Salida a la Costa Verde en noviembre',
     desc: 'Ocho horas previstas, lluvia desde primera hora y un grupo de seis personas. El guía rehízo el itinerario: bosque en lugar de acantilado, mesa cubierta al final del día. La salida se mantuvo; el plan cambió.',
   },
@@ -268,10 +275,12 @@ function SectionHead({ label, title, desc, dark = false }) {
 function Hero({ onWhatsApp }) {
   return (
     <section className="hero" id="inicio">
-      <img className="hero-img" src={`${IMG}/hero.svg`} alt="Paisaje del norte de España entre montañas y mar" />
+      <img className="hero-img" src={`${IMG}/hero/hero-01.webp`} alt="Paisaje del norte de España entre montañas y mar" />
       <div className="hero-overlay" />
       <div className="hero-content">
-        <span className="badge badge-demo">Proyecto conceptual · Demo CAT CODE</span>
+        {DEMO_MODE && (
+          <span className="badge badge-demo">Proyecto conceptual · Demo CAT CODE</span>
+        )}
         <h1 className="hero-title">El norte se vive.</h1>
         <p className="hero-sub">
           Descubre paisajes, sabores y experiencias que no aparecen en las rutas
@@ -316,7 +325,7 @@ function Intro() {
           </a>
         </div>
         <figure className="about-figure">
-          <img src={`${IMG}/about.svg`} alt="Persona caminando por un paisaje del norte de España" />
+          <img src={`${IMG}/about/travelers.webp`} alt="Paisaje del norte de España" />
           <figcaption>
             <h3 className="about-title">Viajar más despacio. Descubrir más.</h3>
             <p className="body-text">
@@ -332,7 +341,7 @@ function Intro() {
   )
 }
 
-function Experiences({ onWhatsApp }) {
+function Experiences({ onOpen }) {
   return (
     <section className="section band-sand" id="experiencias">
       <div className="wrap">
@@ -352,7 +361,7 @@ function Experiences({ onWhatsApp }) {
                 <button
                   type="button"
                   className="text-link"
-                  onClick={() => onWhatsApp(waMsg(`Me interesa la experiencia de ${exp.title.toLowerCase()}.`))}
+                  onClick={() => onOpen({ ...exp, kind: 'Experiencia' })}
                 >
                   Explorar →
                 </button>
@@ -429,7 +438,7 @@ function Featured({ onWhatsApp }) {
       <div className="featured">
         <img
           className="featured-img"
-          src={`${IMG}/featured.svg`}
+          src={`${IMG}/featured/montana-mar.webp`}
           alt="Paisaje entre montañas y mar en el norte de España"
           loading="lazy"
         />
@@ -497,7 +506,7 @@ function Faq() {
   )
 }
 
-function Journal({ onWhatsApp }) {
+function Journal({ onWhatsApp, onOpen }) {
   return (
     <section className="section band-dark" id="inspiracion">
       <div className="wrap">
@@ -518,6 +527,13 @@ function Journal({ onWhatsApp }) {
                 </div>
                 <h3 className="journal-title">{post.title}</h3>
                 <p className="journal-excerpt">{post.excerpt}</p>
+                <button
+                  type="button"
+                  className="text-link"
+                  onClick={() => onOpen({ ...post, kind: 'Journal' })}
+                >
+                  Leer más →
+                </button>
               </div>
             </article>
           ))}
@@ -557,19 +573,55 @@ function SuccessCases() {
   )
 }
 
+const EMPTY_FORM = { nombre: '', email: '', tipo: '', personas: '', mensaje: '' }
+
 function ExtraForm() {
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState('idle')
+  const [error, setError] = useState('')
+  const [values, setValues] = useState(EMPTY_FORM)
+
+  function handleChange(e) {
+    const { name, value } = e.target
+    setValues((prev) => ({ ...prev, [name]: value }))
+  }
+
+  function fillExample() {
+    setValues({
+      nombre: 'Ana García',
+      email: 'ana@ejemplo.com',
+      tipo: FORM_TYPES[0],
+      personas: FORM_GROUP_SIZES[1],
+      mensaje: 'Nos gustaría una escapada de 3 días en octubre, dos personas, con naturaleza y gastronomía.',
+    })
+    setError('')
+    setStatus('idle')
+  }
+
+  function resetForm() {
+    setValues(EMPTY_FORM)
+    setError('')
+    setStatus('idle')
+  }
 
   function handleSubmit(e) {
     e.preventDefault()
-    setSent(true)
+    if (!/^[^\s@]+@ejemplo\.(com|es)$/i.test(values.email)) {
+      setError('Usa un correo de ejemplo (nombre@ejemplo.com).')
+      setStatus('error')
+      return
+    }
+    setError('')
+    setStatus('loading')
+    window.setTimeout(() => setStatus('success'), 700)
   }
 
   return (
     <section className="section band-sand" id="contacto">
       <div className="wrap">
         <div className="extra-head">
-          <span className="badge badge-dark">Extra · a presupuestar</span>
+          <span className="badge badge-dark" title="No viene incluido en tu nivel: el contacto es WhatsApp. Pídenoslo como extra.">
+            Extra · a presupuestar
+          </span>
           <SectionHead
             label="Formulario de contacto"
             title="¿Prefieres contárnoslo por escrito?"
@@ -581,20 +633,43 @@ function ExtraForm() {
           sitio.
         </p>
         <form className="form" onSubmit={handleSubmit}>
+          <div className="form-actions">
+            <button type="button" className="btn-example" onClick={fillExample}>
+              Rellenar con datos de ejemplo
+            </button>
+          </div>
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="f-nombre">Nombre</label>
-              <input id="f-nombre" name="nombre" type="text" placeholder="Tu nombre" required />
+              <input
+                id="f-nombre"
+                name="nombre"
+                type="text"
+                placeholder="Tu nombre"
+                value={values.nombre}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="form-group">
               <label htmlFor="f-email">Email</label>
-              <input id="f-email" name="email" type="email" placeholder="tu@email.com" required />
+              <input
+                id="f-email"
+                name="email"
+                type="email"
+                placeholder="nombre@ejemplo.com"
+                pattern="[^@\s]+@ejemplo\.(com|es)"
+                title="Usa un correo de ejemplo, p. ej. nombre@ejemplo.com"
+                value={values.email}
+                onChange={handleChange}
+                required
+              />
             </div>
           </div>
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="f-tipo">Tipo de experiencia</label>
-              <select id="f-tipo" name="tipo" defaultValue="" required>
+              <select id="f-tipo" name="tipo" value={values.tipo} onChange={handleChange} required>
                 <option value="" disabled>
                   Selecciona una opción
                 </option>
@@ -605,7 +680,13 @@ function ExtraForm() {
             </div>
             <div className="form-group">
               <label htmlFor="f-personas">Personas</label>
-              <select id="f-personas" name="personas" defaultValue="" required>
+              <select
+                id="f-personas"
+                name="personas"
+                value={values.personas}
+                onChange={handleChange}
+                required
+              >
                 <option value="" disabled>
                   Nº de personas
                 </option>
@@ -622,17 +703,37 @@ function ExtraForm() {
               name="mensaje"
               rows={4}
               placeholder="Cuéntanos fechas aproximadas, tipo de grupo y qué te apetece vivir..."
+              value={values.mensaje}
+              onChange={handleChange}
             />
           </div>
-          <button type="submit" className="btn btn-dark" disabled={sent}>
-            {sent ? 'Solicitud registrada (demo)' : 'Enviar solicitud'}
+          <button
+            type="submit"
+            className="btn btn-dark"
+            disabled={status === 'loading' || status === 'success'}
+          >
+            {status === 'loading'
+              ? 'Enviando…'
+              : status === 'success'
+                ? 'Solicitud registrada (demo)'
+                : 'Enviar solicitud'}
           </button>
-          {sent && (
-            <p className="form-success" role="status">
-              <strong>Esto es una demostración.</strong> Así se vería la
-              confirmación si el formulario estuviera activo. No hemos recibido
-              nada.
+          {status === 'error' && (
+            <p className="form-error" role="alert">
+              {error}
             </p>
+          )}
+          {status === 'success' && (
+            <div className="form-success" role="status">
+              <p>
+                <strong>Esto es una demostración.</strong> Así se vería la
+                confirmación si el formulario estuviera activo. No hemos recibido
+                nada.
+              </p>
+              <button type="button" className="btn-example" onClick={resetForm}>
+                Rellenar otra vez →
+              </button>
+            </div>
           )}
         </form>
       </div>
@@ -693,7 +794,9 @@ function Footer({ onWhatsApp }) {
 
       <div className="wrap footer-bottom">
         <span>© 2026 Ruta Norte</span>
-        <span className="badge badge-demo">Proyecto conceptual · Diseñado por CAT CODE</span>
+        {DEMO_MODE && (
+          <span className="badge badge-demo">Proyecto conceptual · Diseñado por CAT CODE</span>
+        )}
       </div>
     </footer>
   )
@@ -717,8 +820,51 @@ function WhatsAppFab({ onWhatsApp }) {
   )
 }
 
+function DetailModal({ item, onClose, onWhatsApp }) {
+  if (!item) return null
+
+  return (
+    <div className="detail-overlay" role="presentation" onClick={onClose}>
+      <div
+        className="detail-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-label={item.title}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button type="button" className="detail-close" onClick={onClose} aria-label="Cerrar">
+          ×
+        </button>
+        <img className="detail-img" src={item.image} alt={item.title} />
+        <div className="detail-body">
+          <span className="detail-cat">{item.kind}</span>
+          {item.date && <time className="detail-date">{item.date}</time>}
+          <h3 className="detail-title">{item.title}</h3>
+          <p className="detail-text">{item.body || item.desc}</p>
+          <div className="detail-actions">
+            <button
+              type="button"
+              className="btn btn-dark"
+              onClick={() => {
+                onWhatsApp(waMsg(`Me interesa ${item.kind.toLowerCase()} "${item.title}".`))
+                onClose()
+              }}
+            >
+              Consultar por WhatsApp
+            </button>
+            <button type="button" className="btn-example" onClick={onClose}>
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function App() {
   const { send, Toast } = useWhatsApp()
+  const [detail, setDetail] = useState(null)
 
   return (
     <>
@@ -727,18 +873,19 @@ export default function App() {
       <main>
         <Hero onWhatsApp={send} />
         <Intro />
-        <Experiences onWhatsApp={send} />
+        <Experiences onOpen={setDetail} />
         <HowItWorks />
         <Destinations />
         <Featured onWhatsApp={send} />
         <Gallery />
         <Faq />
-        <Journal onWhatsApp={send} />
+        <Journal onWhatsApp={send} onOpen={setDetail} />
         <SuccessCases />
         <ExtraForm />
       </main>
       <Footer onWhatsApp={send} />
       <WhatsAppFab onWhatsApp={send} />
+      <DetailModal item={detail} onClose={() => setDetail(null)} onWhatsApp={send} />
       {Toast}
     </>
   )
