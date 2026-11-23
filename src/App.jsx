@@ -490,17 +490,51 @@ function Gallery() {
   )
 }
 
-function Faq() {
+function Faq({ onWhatsApp }) {
   return (
     <section className="section" id="faq">
-      <SectionHead label="FAQ" title="Preguntas frecuentes" />
-      <div className="faq-list">
-        {FAQ_ITEMS.map((item) => (
-          <details className="faq-item" key={item.q}>
-            <summary className="faq-q">{item.q}</summary>
-            <p className="faq-a">{item.a}</p>
-          </details>
-        ))}
+      <div className="wrap faq-grid">
+        <div className="faq-main">
+          <SectionHead label="FAQ" title="Preguntas frecuentes" />
+          <div className="faq-list">
+            {FAQ_ITEMS.map((item) => (
+              <details className="faq-item" key={item.q}>
+                <summary className="faq-q">{item.q}</summary>
+                <p className="faq-a">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+        <aside className="faq-aside">
+          <figure className="faq-media">
+            <img
+              src={`${IMG}/journal/escapada.webp`}
+              alt="Grupo de viajeros recorriendo un sendero del norte de España"
+              loading="lazy"
+            />
+            <figcaption className="faq-media-cap">
+              <span className="faq-media-label">Antes de salir</span>
+              <p>Resolver dudas también forma parte del viaje.</p>
+            </figcaption>
+          </figure>
+          <div className="faq-help">
+            <span className="eyebrow">Atención cercana</span>
+            <h3 className="faq-help-title">¿No encuentras tu respuesta?</h3>
+            <p className="body-text">
+              Escríbenos y te contamos los detalles de la experiencia que tienes
+              en mente, sin compromiso.
+            </p>
+            <button
+              type="button"
+              className="btn btn-dark btn-sm"
+              onClick={() =>
+                onWhatsApp(waMsg('Tengo una duda sobre Ruta Norte y me gustaría resolverla.'))
+              }
+            >
+              Hablar por WhatsApp
+            </button>
+          </div>
+        </aside>
       </div>
     </section>
   )
@@ -575,7 +609,7 @@ function SuccessCases() {
 
 const EMPTY_FORM = { nombre: '', email: '', tipo: '', personas: '', mensaje: '' }
 
-function ExtraForm() {
+function ExtraForm({ onWhatsApp }) {
   const [status, setStatus] = useState('idle')
   const [error, setError] = useState('')
   const [values, setValues] = useState(EMPTY_FORM)
@@ -617,22 +651,23 @@ function ExtraForm() {
 
   return (
     <section className="section band-sand" id="contacto">
-      <div className="wrap">
-        <div className="extra-head">
-          <span className="badge badge-dark" title="No viene incluido en tu nivel: el contacto es WhatsApp. Pídenoslo como extra.">
-            Extra · a presupuestar
-          </span>
-          <SectionHead
-            label="Formulario de contacto"
-            title="¿Prefieres contárnoslo por escrito?"
-            desc="El contacto principal de esta landing es WhatsApp. El formulario es un extra que se presupuesta aparte."
-          />
-        </div>
-        <p className="demo-note" role="note">
-          <strong>Demostración.</strong> Este formulario no envía nada a ningún
-          sitio.
-        </p>
-        <form className="form" onSubmit={handleSubmit}>
+      <div className="wrap contact-grid">
+        <div className="contact-main">
+          <div className="extra-head">
+            <span className="badge badge-dark" title="No viene incluido en tu nivel: el contacto es WhatsApp. Pídenoslo como extra.">
+              Extra · a presupuestar
+            </span>
+            <SectionHead
+              label="Formulario de contacto"
+              title="¿Prefieres contárnoslo por escrito?"
+              desc="El contacto principal de esta landing es WhatsApp. El formulario es un extra que se presupuesta aparte."
+            />
+          </div>
+          <p className="demo-note" role="note">
+            <strong>Demostración.</strong> Este formulario no envía nada a ningún
+            sitio.
+          </p>
+          <form className="form" onSubmit={handleSubmit}>
           <div className="form-actions">
             <button type="button" className="btn-example" onClick={fillExample}>
               Rellenar con datos de ejemplo
@@ -736,6 +771,43 @@ function ExtraForm() {
             </div>
           )}
         </form>
+        </div>
+        <aside className="contact-aside">
+          <figure className="contact-media">
+            <img
+              src={`${IMG}/cta/final-story.webp`}
+              alt="Viajero contemplando la costa del norte de España"
+              loading="lazy"
+            />
+          </figure>
+          <div className="contact-aside-body">
+            <span className="eyebrow">Vía directa</span>
+            <h3 className="contact-aside-title">O si lo prefieres, WhatsApp.</h3>
+            <p className="body-text">
+              Cuéntanos tu idea en una conversación y te respondemos con los
+              detalles de la experiencia, sin formularios ni esperas.
+            </p>
+            <button
+              type="button"
+              className="btn btn-wa btn-sm"
+              onClick={() =>
+                onWhatsApp(waMsg('Tengo una idea de escapada y prefiero contárosla por WhatsApp.'))
+              }
+            >
+              Hablar por WhatsApp
+            </button>
+            <ul className="contact-aside-list">
+              <li>
+                <span className="trust-check" aria-hidden="true">✓</span>
+                Respuesta el mismo día
+              </li>
+              <li>
+                <span className="trust-check" aria-hidden="true">✓</span>
+                Te guía quien conoce el norte
+              </li>
+            </ul>
+          </div>
+        </aside>
       </div>
     </section>
   )
@@ -878,10 +950,10 @@ export default function App() {
         <Destinations />
         <Featured onWhatsApp={send} />
         <Gallery />
-        <Faq />
+        <Faq onWhatsApp={send} />
         <Journal onWhatsApp={send} onOpen={setDetail} />
         <SuccessCases />
-        <ExtraForm />
+        <ExtraForm onWhatsApp={send} />
       </main>
       <Footer onWhatsApp={send} />
       <WhatsAppFab onWhatsApp={send} />
